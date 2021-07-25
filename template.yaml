@@ -14,7 +14,7 @@ Resources:
   CommentatorAPI:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: dev
+      StageName: Prod
       Description: "This is Sample Rest API"
       Cors:
         AllowMethods: "'GET, POST, OPTIONS'"

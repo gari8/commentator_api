@@ -9,6 +9,4 @@ invoke:
 run:
 	make build && sam local start-api
 deploy:
-	sam deploy --profile localmaster
-deploy-all:
-	make build && make deploy
+	make build && sam deploy --profile localmaster

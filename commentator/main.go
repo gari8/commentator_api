@@ -44,8 +44,14 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	ps := commentator.Parser{Content: request.Body}
 
 	response, err := ps.Exec()
+	if err != nil {
+		return events.APIGatewayProxyResponse{}, err
+	}
 
-	responseBody, _ := json.Marshal(response)
+	responseBody, err := json.Marshal(response)
+	if err != nil {
+		return events.APIGatewayProxyResponse{}, err
+	}
 
 	return events.APIGatewayProxyResponse{
 		Body:       string(responseBody),

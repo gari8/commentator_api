@@ -1,6 +1,7 @@
 package main
 
 import (
+	"commentator/tools/commentator"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -9,7 +10,17 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
+const goFileTxt = "{\n    \"content\": \"package main\\n func main(){\\n println('hi')\\n}\"\n}\n"
+
 func TestHandler(t *testing.T) {
+	t.Run("Successful Parser", func(t *testing.T) {
+		ps := commentator.Parser{Content: goFileTxt}
+		_, err := ps.Exec()
+		if err != nil {
+			t.Fatal("Parser is inadequate")
+		}
+	})
+
 	t.Run("Unable to get IP", func(t *testing.T) {
 		DefaultHTTPGetAddress = "http://127.0.0.1:12345"
 
@@ -56,7 +67,9 @@ func TestHandler(t *testing.T) {
 
 		DefaultHTTPGetAddress = ts.URL
 
-		_, err := handler(events.APIGatewayProxyRequest{})
+		_, err := handler(events.APIGatewayProxyRequest{
+			Body: goFileTxt,
+		})
 		if err != nil {
 			t.Fatal("Everything should be ok")
 		}

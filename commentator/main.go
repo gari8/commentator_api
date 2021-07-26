@@ -4,6 +4,7 @@ import (
 	"commentator/tools/commentator"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"io/ioutil"
@@ -40,6 +41,8 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	if len(ip) == 0 {
 		return events.APIGatewayProxyResponse{}, ErrNoIP
 	}
+
+	fmt.Println("request start: ", request.Body)
 
 	ps := commentator.Parser{Content: request.Body}
 

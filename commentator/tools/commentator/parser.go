@@ -48,7 +48,10 @@ func (p *Parser) Exec() (Response, error) {
 	if err != nil {
 		return Response{}, err
 	}
-
+	an := Analysis{
+		Src: body.Content,
+	}
+	an.Exec()
 	var lines []*Data
 	for range make([]int, 10) {
 		var types []*DataType

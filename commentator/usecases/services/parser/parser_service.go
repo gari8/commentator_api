@@ -1,7 +1,7 @@
 package parser
 
 type Repository interface {
-	ParseFile(body []byte) ([]byte, error)
+	ParseFile(body []byte) (string, error)
 }
 
 type ParserService struct {
@@ -12,6 +12,6 @@ func NewParserService(repo Repository) ParserService {
 	return ParserService{repo: repo}
 }
 
-func (s ParserService) ParseFile(body []byte) ([]byte, error) {
+func (s ParserService) ParseFile(body []byte) (string, error) {
 	return s.repo.ParseFile(body)
 }

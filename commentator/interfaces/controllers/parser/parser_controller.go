@@ -43,9 +43,8 @@ func NewParserController(
 
 func (c parserController) getParseFileParams(request events.APIGatewayProxyRequest) (parserUsecase.ParseFileInput, error) {
 	sh := shuttle.New(request.Body, boundary)
-	content := []byte(sh.Launch("file"))
 	return parserUsecase.ParseFileInput{
-		FileByte: content,
+		FileByte: []byte(sh.Launch("file")),
 	}, nil
 }
 

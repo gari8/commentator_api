@@ -11,9 +11,9 @@ func NewParseFilePresenter() ParseFilePresenter {
 	return ParseFilePresenter{}
 }
 
-func (p ParseFilePresenter) CreateResponse(body []byte) domain.Response {
+func (p ParseFilePresenter) CreateResponse(body string) domain.Response {
 	return domain.Response{
 		Code:   http.StatusOK,
-		Object: string(body),
+		Object: body,
 	}
 }
